@@ -360,3 +360,461 @@
     }
     .cart-item-row {
       display: flex;
+      justify-content: space-between;
+align-items: center;
+padding: 10px 0;
+border-bottom: 1px solid var(--border);
+}
+.cart-item-row:last-child { border-bottom: none; }
+/* Centro de Controle */
+.admin-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 16px;
+gap: 10px;
+}
+.admin-header h2 { font-size: 1.15rem; font-weight: 900; }
+.admin-header p { font-size: 0.76rem; color: var(--muted); }
+.btn-new-prod {
+background: var(--red);
+color: #fff;
+border: none;
+padding: 8px 12px;
+border-radius: 8px;
+font-size: 0.78rem;
+font-weight: 800;
+cursor: pointer;
+white-space: nowrap;
+}
+.table-wrap {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: 12px;
+overflow-x: auto;
+margin-bottom: 18px;
+}
+table { width: 100%; border-collapse: collapse; min-width: 580px; }
+th {
+text-align: left;
+font-size: 0.72rem;
+color: var(--muted);
+padding: 12px;
+border-bottom: 1px solid var(--border);
+font-weight: 700;
+}
+td {
+padding: 10px 12px;
+border-bottom: 1px solid var(--border);
+font-size: 0.82rem;
+vertical-align: middle;
+}
+.td-input {
+width: 72px;
+padding: 6px 8px;
+font-size: 0.8rem;
+font-family: monospace;
+}
+.btn-save-sm {
+background: transparent;
+border: 1px solid var(--border);
+color: #fff;
+padding: 5px 10px;
+border-radius: 6px;
+font-size: 0.75rem;
+cursor: pointer;
+}
+.btn-save-sm:hover { border-color: var(--red-bright); }
+.icon-action {
+background: transparent;
+border: none;
+color: var(--muted);
+cursor: pointer;
+padding: 4px;
+font-size: 0.95rem;
+}
+.status-pill {
+font-size: 0.65rem;
+font-weight: 800;
+padding: 3px 7px;
+border-radius: 4px;
+text-transform: uppercase;
+}
+.st-pago { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.st-cancelado { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+.st-pendente { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+/* Modal Editar/Novo Produto (Idêntico ao print) */
+.modal-bg {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.85);
+backdrop-filter: blur(4px);
+z-index: 200;
+align-items: center;
+justify-content: center;
+padding: 16px;
+}
+.modal-bg.open { display: flex; }
+.modal-box {
+background: #140e10;
+border: 1px solid var(--border);
+border-radius: 14px;
+width: 100%;
+max-width: 400px;
+padding: 20px;
+}
+
+
+PSYCHOSTORE
+
+
+
+
+
+
+
+🛒 Carrinho 0
+
+
+ ESTOQUE EM TEMPO REAL
+MARRETAS PSYCHO
+Preço e estoque controlados pelo dono, direto do painel ADM. Reserve a sua: o contador cai na hora — pagou, baixa de vez; não pagou, a reserva volta pro ar.
+0 UNIDADES NO AR AGORA
+CARRINHO VAZIO
+Nenhuma marreta no carrinho ainda.
+VER MARRETAS
+SEU CARRINHO
+FINALIZAR COMPRA
+
+Ao finalizar, as unidades ficam reservadas por 30 minutos — combine o pagamento pelo WhatsApp até o dono confirmar o Pix.
+TOTAL
+R$ 0,00
+Seu nome (opcional)
+Telefone (opcional)
+FINALIZAR COMPRA
+
+← Continuar comprando
+
+
+🪚
+
+CENTRO DE CONTROLE
+Acesso exclusivo do dono — preço e estoque na sua mão, a qualquer momento.
+E-mail / usuário
+Senha
+ENTRAR
+CENTRO DE CONTROLE
+Altere preço e estoque a qualquer momento — a vitrine atualiza em segundos.
+
+
++ Novo produto
+Sair
+
+
+Produto	Preço (R$)	Estoque	Disponível	Ações
+
+WHATSAPP PARA PAGAMENTOS
+
+É pra cá que o cliente é levado na tela do pedido para combinar o Pix. Só números, com código do país e DDD (ex: 5521983843322).
+
+
+
+Salvar WhatsApp
+
+PEDIDOS
+
+Pedido	Itens	Total	Status	Criado	Ações
+
+EDITAR PRODUTO
+Preço em reais e estoque em unidades — a vitrine reflete na hora.
+
+✕
+
+
+Nome
+Descrição
+Preço (R$)
+Estoque
+URL da imagem
+SALVAR PRODUTO
+
+const OWNER_USER = "@lojinhadeftfconfiavel30";
+const OWNER_PASS = "pedro9398";
+const initialItems = [
+{ id: 1, name: "PSYCHO'S CHAINSAW", desc: "", price: 3.00, stock: 1, reserved: 0, img: "" },
+{ id: 2, name: "PARTY BALLON", desc: "", price: 11.50, stock: 1, reserved: 0, img: "" },
+{ id: 3, name: "GOTHIC BOUQUET", desc: "", price: 6.50, stock: 1, reserved: 0, img: "" },
+{ id: 4, name: "LOVESICK", desc: "", price: 0.00, stock: 1, reserved: 0, img: "" },
+{ id: 5, name: "HAUNTED CIRCUS TENT", desc: "", price: 1.25, stock: 2, reserved: 0, img: "" },
+{ id: 6, name: "LUNAR WITCH BROOM", desc: "", price: 0.75, stock: 1, reserved: 0, img: "" },
+{ id: 7, name: "SOLAR WITCH BROOM", desc: "", price: 0.75, stock: 1, reserved: 0, img: "" },
+{ id: 8, name: "CELESTIAL WITCH BROOM", desc: "", price: 0.75, stock: 1, reserved: 0, img: "" },
+{ id: 9, name: "ANTIQUE PIANO", desc: "", price: 2.25, stock: 1, reserved: 0, img: "" },
+{ id: 10, name: "BBQ GRILL", desc: "", price: 0.12, stock: 1, reserved: 0, img: "" },
+{ id: 11, name: "DOOMTHRUST", desc: "", price: 0.75, stock: 1, reserved: 0, img: "" },
+{ id: 12, name: "LILY OF THE VALLEY", desc: "", price: 0.09, stock: 1, reserved: 0, img: "" },
+{ id: 13, name: "SNOWBOARDER PENGUIN", desc: "", price: 0.09, stock: 1, reserved: 0, img: "" }
+];
+let products = JSON.parse(localStorage.getItem("psychostore_items_v2")) || initialItems;
+let orders = JSON.parse(localStorage.getItem("psychostore_orders_v2")) || [];
+let whatsappNum = localStorage.getItem("psychostore_wpp_v2") || "5521983843322";
+let cart = [];
+let featuredQty = 1;
+function persist() {
+localStorage.setItem("psychostore_items_v2", JSON.stringify(products));
+localStorage.setItem("psychostore_orders_v2", JSON.stringify(orders));
+localStorage.setItem("psychostore_wpp_v2", whatsappNum);
+renderAll();
+}
+function money(v) {
+return Number(v).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+function imgTag(url, alt) {
+if (url && (url.startsWith("http") || url.startsWith("./"))) {
+return <img src="${url}" alt="${alt}" onerror="this.outerHTML='<span style=font-size:3rem>🪓</span>'" />;
+}
+return <span style="font-size:3rem;">🪓</span>;
+}
+function switchView(name) {
+document.querySelectorAll(".view-section").forEach(el => el.classList.remove("active"));
+document.getElementById("view-" + name).classList.add("active");
+window.scrollTo(0, 0);
+renderAll();
+}
+function openOwnerArea() {
+if (sessionStorage.getItem("psycho_logged") === "1") {
+switchView("admin");
+} else {
+switchView("login");
+}
+}
+function doLogin() {
+const u = document.getElementById("login-user").value.trim().toLowerCase();
+const p = document.getElementById("login-pass").value;
+if (u === OWNER_USER.toLowerCase() && p === OWNER_PASS) {
+sessionStorage.setItem("psycho_logged", "1");
+switchView("admin");
+} else {
+alert("Usuário ou senha incorretos!");
+}
+}
+function doLogout() {
+sessionStorage.removeItem("psycho_logged");
+switchView("store");
+}
+function renderAll() {
+document.getElementById("header-cart-count").innerText = cart.reduce((s, i) => s + i.qty, 0);
+const totalAvail = products.reduce((s, p) => s + Math.max(0, p.stock - p.reserved), 0);
+document.getElementById("total-units-count").innerText = totalAvail;
+const feat = products[0];
+if (feat && feat.img) {
+const heroBg = document.getElementById("hero-bg-img");
+heroBg.src = feat.img;
+heroBg.style.display = "block";
+document.getElementById("login-thumb-wrap").innerHTML = <img src="${feat.img}" class="login-thumb" />;
+}
+const featEl = document.getElementById("featured-container");
+if (feat) {
+const avail = Math.max(0, feat.stock - feat.reserved);
+if (featuredQty > avail) featuredQty = Math.max(1, avail);
+featEl.innerHTML = <div class="featured-card"> <span class="stock-badge ${avail === 0 ? 'out' : ''}"> ${avail > 0 ?ÚLTIMAS ${avail} UNIDADES: 'ESGOTADO'} </span> <div class="featured-visual">${imgTag(feat.img, feat.name)}</div> <div class="featured-info"> <div class="item-name">${feat.name}</div> ${feat.desc ?${feat.desc}: ''} <div class="featured-bottom"> <div> <span class="price-label">PREÇO</span> <span class="price-val">${money(feat.price)}</span> </div> <div class="qty-buy-row"> <div class="qty-box"> <button onclick="changeFeatQty(-1)">-</button> <span>${featuredQty}</span> <button onclick="changeFeatQty(1)">+</button> </div> <button class="btn-buy" ${avail === 0 ? 'disabled' : ''} onclick="addToCart(${feat.id}, featuredQty)"> 🛒 COMPRAR </button> </div> </div> </div> </div>;
+} else {
+featEl.innerHTML = "";
+}
+const gridEl = document.getElementById("grid-container");
+gridEl.innerHTML = products.slice(1).map(p => {
+const avail = Math.max(0, p.stock - p.reserved);
+return <div class="mini-card"> <span class="stock-badge ${avail === 0 ? 'out' : ''}"> ${avail > 0 ?ÚLTIMAS ${avail} UNIDADES: 'ESGOTADO'} </span> <div class="mini-visual">${imgTag(p.img, p.name)}</div> <div class="mini-body"> <div class="mini-title">${p.name}</div> <div class="mini-footer"> <span class="price-val" style="font-size:0.95rem;">${money(p.price)}</span> <button class="btn-buy" style="padding:6px 10px; font-size:0.7rem;" ${avail === 0 ? 'disabled' : ''} onclick="addToCart(${p.id}, 1)"> + Carrinho </button> </div> </div> </div>;
+}).join("");
+renderCartView();
+renderAdminView();
+}
+function changeFeatQty(delta) {
+const feat = products[0];
+if (!feat) return;
+const avail = Math.max(0, feat.stock - feat.reserved);
+featuredQty = Math.min(Math.max(1, featuredQty + delta), Math.max(1, avail));
+renderAll();
+}
+function addToCart(id, qty) {
+const prod = products.find(p => p.id === id);
+if (!prod) return;
+const avail = Math.max(0, prod.stock - prod.reserved);
+if (avail <= 0) return alert("Produto esgotado!");
+const existing = cart.find(c => c.id === id);
+if (existing) {
+if (existing.qty + qty <= avail) existing.qty += qty;
+else return alert("Limite de estoque atingido!");
+} else {
+cart.push({ id: prod.id, name: prod.name, price: prod.price, img: prod.img, qty: Math.min(qty, avail) });
+}
+renderAll();
+}
+function renderCartView() {
+const emptyEl = document.getElementById("cart-empty-state");
+const filledEl = document.getElementById("cart-filled-state");
+if (cart.length === 0) {
+emptyEl.style.display = "block";
+filledEl.style.display = "none";
+return;
+}
+emptyEl.style.display = "none";
+filledEl.style.display = "block";
+const itemsEl = document.getElementById("cart-items-container");
+itemsEl.innerHTML = cart.map((item, idx) => <div class="cart-item-row"> <div style="display:flex; align-items:center; gap:10px;"> <div style="width:42px; height:42px; background:#0b0809; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;"> ${imgTag(item.img, item.name)} </div> <div> <div style="font-size:0.82rem; font-weight:900;">${item.name}</div> <div style="font-size:0.75rem; color:var(--muted);">${money(item.price)} x ${item.qty}</div> </div> </div> <div style="display:flex; align-items:center; gap:10px;"> <span style="font-weight:900; color:var(--red-bright); font-family:monospace;">${money(item.price * item.qty)}</span> <button style="background:transparent; border:none; color:var(--muted); cursor:pointer;" onclick="removeCartItem(${idx})">🗑️</button> </div> </div>).join("");
+const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+document.getElementById("cart-total-val").innerText = money(total);
+}
+function removeCartItem(idx) {
+cart.splice(idx, 1);
+renderAll();
+}
+function finishOrder() {
+if (cart.length === 0) return;
+const buyer = document.getElementById("buyer-name").value.trim() || "Cliente";
+const phone = document.getElementById("buyer-phone").value.trim();
+cart.forEach(item => {
+const prod = products.find(p => p.id === item.id);
+if (prod) prod.reserved += item.qty;
+});
+const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+const orderId = Math.random().toString(16).substring(2, 10).toUpperCase();
+const summaryText = cart.map(i => ${i.qty}x ${i.name}).join(", ");
+orders.unshift({
+id: orderId,
+buyer,
+items: summaryText,
+rawItems: JSON.parse(JSON.stringify(cart)),
+total,
+status: "RESERVADO",
+created: new Date().toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })
+});
+let msg = *PEDIDO #${orderId} - PSYCHOSTORE*\n\n;
+msg += *Cliente/Nick:* ${buyer}\n;
+if (phone) msg += *Telefone:* ${phone}\n;
+msg += *Itens:* ${summaryText}\n;
+msg += *Total:* ${money(total)}\n\n;
+msg += Unidades reservadas! Aguardo a chave Pix para pagar.;
+cart = [];
+persist();
+switchView("store");
+window.open(https://wa.me{whatsappNum}?text=${encodeURIComponent(msg)}, "_blank");
+}
+function renderAdminView() {
+document.getElementById("admin-wpp-input").value = whatsappNum;
+const tbody = document.getElementById("admin-products-tbody");
+tbody.innerHTML = products.map(p => {
+const avail = Math.max(0, p.stock - p.reserved);
+return `
+${avail}`;
+}).join("");
+const oTbody = document.getElementById("admin-orders-tbody");
+oTbody.innerHTML = orders.map((o, idx) => {
+let stClass = "st-pendente";
+if (o.status === "PAGO") stClass = "st-pago";
+if (o.status === "CANCELADO") stClass = "st-cancelado";
+return `
+${o.id}
+\({o.items}<br><small style="color:var(--muted);">\){o.buyer}${money(o.total)}${o.status}${o.created}${o.status === "RESERVADO" ? `
+:-`}
+`;
+}).join("");
+}
+function saveRow(id) {
+const p = products.find(x => x.id === id);
+if (!p) return;
+const newP = parseFloat(document.getElementById("inp-price-" + id).value);
+const newS = parseInt(document.getElementById("inp-stock-" + id).value);
+if (!isNaN(newP)) p.price = newP;
+if (!isNaN(newS)) p.stock = Math.max(0, newS);
+persist();
+alert("Alterações salvas!");
+}
+function confirmPaid(idx) {
+const o = orders[idx];
+if (!o || o.status !== "RESERVADO") return;
+o.rawItems.forEach(item => {
+const prod = products.find(p => p.id === item.id);
+if (prod) {
+prod.reserved = Math.max(0, prod.reserved - item.qty);
+prod.stock = Math.max(0, prod.stock - item.qty);
+}
+});
+o.status = "PAGO";
+persist();
+}
+function cancelOrder(idx) {
+const o = orders[idx];
+if (!o || o.status !== "RESERVADO") return;
+o.rawItems.forEach(item => {
+const prod = products.find(p => p.id === item.id);
+if (prod) {
+prod.reserved = Math.max(0, prod.reserved - item.qty);
+}
+});
+o.status = "CANCELADO";
+persist();
+}
+function saveWhatsapp() {
+const val = document.getElementById("admin-wpp-input").value.replace(/\D/g, "");
+if (val) {
+whatsappNum = val;
+persist();
+alert("WhatsApp salvo!");
+}
+}
+function openProductModal(id = null) {
+document.getElementById("prod-modal").classList.add("open");
+if (id) {
+const p = products.find(x => x.id === id);
+document.getElementById("modal-prod-title").innerText = "EDITAR PRODUTO";
+document.getElementById("edit-prod-id").value = p.id;
+document.getElementById("modal-prod-name").value = p.name;
+document.getElementById("modal-prod-desc").value = p.desc || "";
+document.getElementById("modal-prod-price").value = p.price;
+document.getElementById("modal-prod-stock").value = p.stock;
+document.getElementById("modal-prod-img").value = p.img || "";
+} else {
+document.getElementById("modal-prod-title").innerText = "NOVO PRODUTO";
+document.getElementById("edit-prod-id").value = "";
+document.getElementById("modal-prod-name").value = "";
+document.getElementById("modal-prod-desc").value = "";
+document.getElementById("modal-prod-price").value = "";
+document.getElementById("modal-prod-stock").value = "1";
+document.getElementById("modal-prod-img").value = "";
+}
+}
+function closeProductModal() {
+document.getElementById("prod-modal").classList.remove("open");
+}
+function saveProductModal() {
+const id = document.getElementById("edit-prod-id").value;
+const name = document.getElementById("modal-prod-name").value.trim().toUpperCase();
+const desc = document.getElementById("modal-prod-desc").value.trim();
+const price = parseFloat(document.getElementById("modal-prod-price").value) || 0;
+const stock = parseInt(document.getElementById("modal-prod-stock").value) || 0;
+const img = document.getElementById("modal-prod-img").value.trim();
+if (!name) return alert("Digite o nome do produto!");
+if (id) {
+const p = products.find(x => x.id == id);
+if (p) {
+p.name = name;
+p.desc = desc;
+p.price = price;
+p.stock = stock;
+p.img = img;
+}
+} else {
+products.push({ id: Date.now(), name, desc, price, stock, reserved: 0, img });
+}
+closeProductModal();
+persist();
+}
+function deleteItem(id) {
+if (!confirm("Excluir este item?")) return;
+products = products.filter(p => p.id !== id);
+persist();
+}
+renderAll();
+  
