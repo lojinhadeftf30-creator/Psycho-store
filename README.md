@@ -1,2 +1,0 @@
-# Psycho-store
-Psycho | store
